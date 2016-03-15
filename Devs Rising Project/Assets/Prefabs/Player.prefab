@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2306522}
   - 114: {fileID: 11407668}
   - 114: {fileID: 11448296}
+  - 54: {fileID: 5445754}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -65,6 +66,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140334}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &5445754
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140334}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!114 &11407668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,6 +103,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64db215804be05b43ba91b5221a598fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 4
+  moveHorizontal: 0
+  moveVertical: 0
+  hasJumped: 0
+  rigidBody: {fileID: 0}
+  jumpSpeed: 6
 --- !u!136 &13632816
 CapsuleCollider:
   m_ObjectHideFlags: 1
