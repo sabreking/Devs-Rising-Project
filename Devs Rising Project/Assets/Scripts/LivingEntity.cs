@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class LivingEntity : MonoBehaviour {
-
+    //Davion is working on this script
 	// Use this for initialization
 	void Start () {
 	
