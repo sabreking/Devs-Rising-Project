@@ -4,23 +4,24 @@ using System.Collections;
 public class Player : LivingEntity {
 
     //variables for PlayerMove()
-    public float velocity = 4.0f;
-    public float moveHorizontal;
-    public float moveVertical;
+    float velocity = 0.3f;
+    //public float moveHorizontal;
+    //public float moveVertical;
 
-    private float xPos; //Player position on the x axis
-    private float yPos; //Player position on the y axis
+    //private float xPos; //Player position on the x axis
+    //private float yPos; //Player position on the y axis
 
     //variables for PlayerJump()
-    public bool hasJumped;
-    public Rigidbody rigidBody;
-    public float jumpSpeed = 6.0f;
+    bool _hasJumped;
+    public Rigidbody _rigidBody;
+    public float _jumpSpeed = 6.0f;
 
     //variables for PlayerDeploysPlatform()
 
     // Use this for initialization
-    void Start () {
-	
+    public override void Start () {
+        base.Start ();
+        //TakeDamage (23);
 	}
 	
 	// Update is called once per frame
@@ -30,36 +31,24 @@ public class Player : LivingEntity {
 
     public void PlayerMove(float moveHorizontal, float moveVertical)
     {
-        if (Input.GetAxis("Horizontal") < 0)
+        if ( moveHorizontal < 0)
         {
-            moveHorizontal = Input.GetAxis("Horizontal");
-            xPos = transform.position.x;
-            xPos = (xPos - moveHorizontal) * velocity * Time.deltaTime;
+            var xPos = transform.position.x+velocity*-1;
+            
+            transform.position= new Vector3 (xPos , transform.position.y , transform.position.z);
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        else if ( moveHorizontal > 0)
         {
-            moveHorizontal = Input.GetAxis("Horizontal");
-            xPos = transform.position.x;
-            xPos = (xPos - moveHorizontal) * velocity * Time.deltaTime;
-        }
-        else if (Input.GetAxis("Vertical") < 0)
-        {
-            moveVertical = Input.GetAxis("Vertical");
-            yPos = transform.position.y;
-            yPos = (yPos - moveVertical) * velocity * Time.deltaTime;
-        }
-        else if (Input.GetAxis("Vertical") > 0)
-        {
-            moveVertical = Input.GetAxis("Vertical");
-            yPos = transform.position.y;
-            yPos = (yPos + moveVertical) * velocity * Time.deltaTime;
+            var xPos = transform.position.x + velocity;
+
+            transform.position = new Vector3 (xPos , transform.position.y , transform.position.z);
         }
     }
 
     public void PlayerJump(bool hasJumped)
     {
-        rigidBody = GetComponent<Rigidbody>();
-        rigidBody.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);//Based on the Unity description ForceMode.Impulse may look smoother. Try without if it doesn't look good.
+        _rigidBody = GetComponent<Rigidbody>();
+        _rigidBody.AddForce(transform.up * _jumpSpeed, ForceMode.Impulse);//Based on the Unity description ForceMode.Impulse may look smoother. Try without if it doesn't look good.
     }
 
     public void UseTool()
