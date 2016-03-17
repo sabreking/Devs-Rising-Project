@@ -8,7 +8,8 @@ public class Player : LivingEntity {
     public float moveHorizontal;
     public float moveVertical;
 
-    private Vector3 _movement;
+    private float xPos; //Player position on the x axis
+    private float yPos; //Player position on the y axis
 
     //variables for PlayerJump()
     public bool hasJumped;
@@ -29,8 +30,30 @@ public class Player : LivingEntity {
 
     public void PlayerMove(float moveHorizontal, float moveVertical)
     {
-        _movement.Set(moveHorizontal, 0f, moveVertical);
-        _movement = _movement.normalized * velocity * Time.deltaTime;
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            moveHorizontal = Input.GetAxis("Horizontal");
+            xPos = transform.position.x;
+            xPos = (xPos - moveHorizontal) * velocity * Time.deltaTime;
+        }
+        else if (Input.GetAxis("Horizontal") > 0)
+        {
+            moveHorizontal = Input.GetAxis("Horizontal");
+            xPos = transform.position.x;
+            xPos = (xPos - moveHorizontal) * velocity * Time.deltaTime;
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            moveVertical = Input.GetAxis("Vertical");
+            yPos = transform.position.y;
+            yPos = (yPos - moveVertical) * velocity * Time.deltaTime;
+        }
+        else if (Input.GetAxis("Vertical") > 0)
+        {
+            moveVertical = Input.GetAxis("Vertical");
+            yPos = transform.position.y;
+            yPos = (yPos + moveVertical) * velocity * Time.deltaTime;
+        }
     }
 
     public void PlayerJump(bool hasJumped)
